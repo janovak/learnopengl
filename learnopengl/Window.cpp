@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <algorithm>
 #include <iostream>
 
 #include <shaders.h>
@@ -7,6 +8,8 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
+
+float mixValue = 0.2f;
 
 int main()
 {
@@ -129,6 +132,8 @@ int main()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
+		ourShader.setFloat("mixValue", mixValue);
+
 		ourShader.use();
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -155,5 +160,14 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
+	}
+	float delta = 0.01;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		mixValue = std::min(1.0f, mixValue + delta);
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		mixValue = std::max(0.0f, mixValue - delta);
 	}
 }
