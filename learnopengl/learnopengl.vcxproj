@@ -139,6 +139,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\camera.h" />
     <ClInclude Include="includes\shaders.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
