@@ -147,6 +147,12 @@
     <Image Include="resources\textures\awesomeface.png" />
     <Image Include="resources\textures\container.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="glsl\colors.frag" />
+    <None Include="glsl\colors.vert" />
+    <None Include="glsl\light_cube.frag" />
+    <None Include="glsl\light_cube.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
