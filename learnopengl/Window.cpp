@@ -125,7 +125,7 @@ int main()
     glEnableVertexAttribArray(0);
 
     unsigned int diffuseMap = loadTexture("resources/textures/container2.png");
-    unsigned int specularMap = loadTexture("resources/textures/container2_specular.png");
+    unsigned int specularMap = loadTexture("resources/textures/lighting_maps_specular_color.png");
 
     lightingShader.use();
     lightingShader.setInt("material.diffuse", 0);
