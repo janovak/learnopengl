@@ -146,6 +146,8 @@
   <ItemGroup>
     <Image Include="resources\textures\awesomeface.png" />
     <Image Include="resources\textures\container.jpg" />
+    <Image Include="resources\textures\container2.png" />
+    <Image Include="resources\textures\container2_specular.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl\colors.frag" />
