@@ -26,8 +26,6 @@ float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
-glm::vec3 lightPos(-0.2f, -1.0f, -0.3f);
-
 int main()
 {
     glfwInit();
@@ -156,21 +154,19 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         lightingShader.use();
-        lightingShader.setVec3("material.ambient", 0.135f, 0.2225f, 0.1575f);
-        lightingShader.setVec3("material.diffuse", 0.54f, 0.89f, 0.63f);
-        lightingShader.setVec3("material.specular", 0.316228f, 0.316228f, 0.316228f);
         lightingShader.setFloat("material.shininess", 32.0f);
 
-        lightingShader.setVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+        lightingShader.setVec3("light.ambient", glm::vec3(0.1f, 0.1f, 0.1f));
         lightingShader.setVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
         lightingShader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-
-        lightingShader.setVec3("light.position", lightPos);
 
         lightingShader.setFloat("light.constant", 1.0f);
         lightingShader.setFloat("light.linear", 0.09f);
         lightingShader.setFloat("light.quadratic", 0.032f);
 
+        lightingShader.setVec3("light.position", camera.Position);
+        lightingShader.setVec3("light.direction", camera.Front);
+        lightingShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
         lightingShader.setVec3("viewPos", camera.Position);
 
         glActiveTexture(GL_TEXTURE0);
@@ -196,17 +192,6 @@ int main()
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-
-        lightCubeShader.use();
-        lightCubeShader.setMat4("projection", projection);
-        lightCubeShader.setMat4("view", view);
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f));
-        lightCubeShader.setMat4("model", model);
-
-        glBindVertexArray(lightCubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
